@@ -1,0 +1,17 @@
+displayName: SAP Financial Audit & Compliance
+description: This data product provides enterprise financial audit, ledger reconciliation, and SOX compliance models from the SAP Financial Accounting (FI) and Controlling (CO) modules in SAP S/4HANA. It isolates anomalous manual journal postings, detects potential fraud and out-of-period entries, and performs automated debit/credit balancing across company codes and fiscal periods.
+category: source_aligned_product
+type: financial_audit_and_compliance
+dependencies:
+  sapModule:
+    supportedVersions:
+    - s4
+    tables:
+      s4:
+      - acdoca
+      - bkpf
+      - bseg
+      common:
+      - tcurx
+    modulePath: cortex.sap.foundations.sap
+builder: sap_product

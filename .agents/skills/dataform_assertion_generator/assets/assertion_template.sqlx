@@ -1,0 +1,29 @@
+﻿config {
+  type: "assertion",
+  description: "Validates primary key uniqueness and referential integrity for the target data product"
+}
+
+/*
+  Dataform Assertion Rule:
+  Any rows returned by this query represent failing validation records.
+  A successful assertion returns 0 rows.
+*/
+
+WITH validation_errors AS (
+  SELECT
+    client_mandt,
+    document_number_vbeln,
+    COUNT(*) AS row_count
+  FROM
+    ${ref("sales_document_headers")}
+  GROUP BY
+    client_mandt,
+    document_number_vbeln
+  HAVING
+    COUNT(*) > 1
+)
+
+SELECT
+  *
+FROM
+  validation_errors

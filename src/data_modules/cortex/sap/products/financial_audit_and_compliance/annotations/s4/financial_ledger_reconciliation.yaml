@@ -1,0 +1,34 @@
+description: Reconciles financial debits and credits across SAP S/4HANA Universal Journal (ACDOCA) records, identifying balanced and imbalanced document postings per company code, fiscal year, and ledger.
+fields:
+  - name: client_mandt
+    description: Client (Mandant) identifier in SAP S/4HANA, PK.
+  - name: company_code_bukrs
+    description: Company Code representing the legal reporting entity, PK.
+  - name: document_number_belnr
+    description: Accounting document number, PK.
+  - name: fiscal_year_gjahr
+    description: Fiscal year of the posted journal transaction, PK.
+  - name: ledger_rldnr
+    description: General Ledger or Extension Ledger identifier, PK.
+  - name: document_type_blart
+    description: Accounting document type indicating the business transaction class.
+  - name: posting_date_budat
+    description: Date the transaction was posted to the general ledger.
+  - name: document_date_bldat
+    description: Date on the originating commercial invoice or document.
+  - name: entry_date_cpudt
+    description: System timestamp date when the entry was physically keyed into SAP.
+  - name: user_name_usnam
+    description: SAP user ID that keyed or executed the posting.
+  - name: company_code_currency_rhcur
+    description: Local currency key for the company code entity.
+  - name: total_line_items_count
+    description: Total count of distinct line items comprising the accounting document.
+  - name: total_debit_amount_in_company_currency
+    description: Aggregate sum of all debit line item amounts in company currency.
+  - name: total_credit_amount_in_company_currency
+    description: Aggregate sum of all credit line item amounts in company currency.
+  - name: net_ledger_balance_amount
+    description: Net financial balance (Debits minus Credits); must equal zero in double-entry bookkeeping.
+  - name: reconciliation_status
+    description: Audit compliance status (BALANCED when net variance is under 0.01, otherwise IMBALANCED).

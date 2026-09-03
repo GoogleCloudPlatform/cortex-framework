@@ -1,0 +1,21 @@
+s4:
+  financial_ledger_reconciliation:
+    materializationType: incremental
+    bigQueryLabels:
+    - key: line_of_business
+      value: finance
+    - key: sap_module
+      value: sap_fi
+    - key: data_class
+      value: analytical
+    dataformTags: [sap, source_aligned_product, finance, sap_fi, audit, compliance, daily]
+  suspicious_journal_entries:
+    materializationType: incremental
+    bigQueryLabels:
+    - key: line_of_business
+      value: finance
+    - key: sap_module
+      value: sap_fi
+    - key: data_class
+      value: analytical
+    dataformTags: [sap, source_aligned_product, finance, sap_fi, fraud, audit, daily]

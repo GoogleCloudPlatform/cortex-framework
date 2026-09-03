@@ -1,0 +1,66 @@
+# Copyright 2026 Google LLC
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+description: Scope 3 Category 1 GHG emissions calculation for purchased goods and services based on SAP S/4HANA Purchase Orders (EKKO, EKPO), Material Master (MARA), and Supplier Master (LFA1).
+fields:
+  - name: client_mandt
+    description: Client (Mandant) identifier in SAP S/4HANA, PK.
+  - name: purchase_order_ebeln
+    description: Purchasing document number (Purchase Order), PK.
+  - name: purchase_order_item_ebelp
+    description: Item number of purchasing document, PK.
+  - name: company_code_bukrs
+    description: Company Code representing the legal reporting entity.
+  - name: purchasing_organization_ekorg
+    description: Purchasing organization responsible for the procurement contract.
+  - name: purchasing_group_ekgrp
+    description: Buyer group key responsible for the item procurement.
+  - name: supplier_lifnr
+    description: Account number of the vendor / supplier.
+  - name: supplier_name_name1
+    description: Registered business name of the supplier.
+  - name: supplier_country_land1
+    description: Country key of the supplier headquarters.
+  - name: purchasing_document_date_bedat
+    description: Purchasing document creation date.
+  - name: currency_key_waers
+    description: Document currency key for the purchase order.
+  - name: material_number_matnr
+    description: Material number identifying the purchased product or service.
+  - name: short_text_txz01
+    description: Short description of the purchased item.
+  - name: material_group_matkl
+    description: Material group classifying the commodity for GHG factor mapping.
+  - name: plant_werks
+    description: Receiving manufacturing plant or fulfillment site.
+  - name: order_quantity_menge
+    description: Quantity of goods purchased.
+  - name: order_unit_meins
+    description: Purchase order unit of measurement.
+  - name: net_price_netpr
+    description: Net price per unit, adjusted by currency decimal shifting (TCURX).
+  - name: net_order_value_netwr
+    description: Net order value in document currency.
+  - name: net_weight_ntgew
+    description: Net weight of the material item.
+  - name: weight_unit_gewei
+    description: Unit of weight (e.g., KG, LB).
+  - name: spend_based_emissions_kg_co2e
+    description: Estimated Scope 3 Category 1 emissions calculated using spend-based EEIO emission factors (kg CO2e).
+  - name: mass_based_emissions_kg_co2e
+    description: Estimated Scope 3 Category 1 emissions calculated using physical material mass factors (kg CO2e).
+  - name: total_estimated_ghg_emissions_kg_co2e
+    description: Combined GHG footprint in kilograms of CO2 equivalent (kg CO2e).
+  - name: carbon_intensity_classification
+    description: Categorical carbon footprint tier (HIGH_CARBON_INTENSIVE, MEDIUM_CARBON_INTENSIVE, LOW_CARBON_INTENSIVE).

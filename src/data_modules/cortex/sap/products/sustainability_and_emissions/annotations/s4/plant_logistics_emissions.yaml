@@ -1,0 +1,68 @@
+# Copyright 2026 Google LLC
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+description: Scope 1 and Scope 3 Category 4 logistics greenhouse gas emissions derived from SAP S/4HANA universal material documents (MATDOC) and manufacturing plant network (T001W).
+fields:
+  - name: client_mandt
+    description: Client (Mandant) identifier in SAP S/4HANA, PK.
+  - name: material_document_mblnr
+    description: Number of material document representing physical movement, PK.
+  - name: material_year_mjahr
+    description: Material document fiscal year, PK.
+  - name: document_item_zeile
+    description: Item in material document, PK.
+  - name: movement_type_bwart
+    description: SAP movement type indicator (e.g. 101 Goods Receipt, 301 Inter-plant Transfer, 201 Goods Issue).
+  - name: material_number_matnr
+    description: Material number of transported item.
+  - name: source_plant_werks
+    description: Issuing or source manufacturing plant identifier.
+  - name: source_plant_name
+    description: Name of the originating manufacturing plant.
+  - name: source_country_land1
+    description: Country code of the source plant.
+  - name: storage_location_lgort
+    description: Issuing storage location within the plant.
+  - name: receiving_plant_umwrk
+    description: Receiving plant identifier for inter-plant transfers.
+  - name: receiving_plant_name
+    description: Name of the receiving manufacturing plant.
+  - name: receiving_country_land1
+    description: Country code of the destination plant.
+  - name: receiving_storage_location_umlgo
+    description: Receiving storage location.
+  - name: debit_credit_shkzg
+    description: Debit / Credit indicator of inventory balance change.
+  - name: posting_date_budat
+    description: Date the inventory movement was posted to the ledger.
+  - name: entry_date_cpudt
+    description: System timestamp date when the material movement was recorded.
+  - name: entered_by_usnam
+    description: User name who recorded the movement.
+  - name: quantity_menge
+    description: Quantity of material moved.
+  - name: base_unit_meins
+    description: Base unit of measure for inventory quantity.
+  - name: item_gross_weight_brgew
+    description: Gross weight per unit of the material from MARA.
+  - name: weight_unit_gewei
+    description: Weight unit of measurement (KG, TO).
+  - name: total_weight_metric_tons
+    description: Total transported shipment mass converted to metric tons.
+  - name: is_interplant_transfer
+    description: Boolean flag indicating if movement is a freight transfer between distinct plants.
+  - name: ghg_scope_boundary
+    description: Greenhouse gas protocol boundary (SCOPE_1_INTERNAL_OPERATIONS, SCOPE_3_CATEGORY_4_UPSTREAM_TRANSPORT).
+  - name: estimated_logistics_emissions_kg_co2e
+    description: Estimated freight and internal handling emissions in kilograms of CO2 equivalent (kg CO2e).
