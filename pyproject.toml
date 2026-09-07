@@ -38,6 +38,7 @@ cortex-build-and-deploy = "tools.run_all:main"
 cortex-demo = "tools.demo:main"
 cortex-kc-sync = "tools.kc_sync:main"
 cortex-config = "tools.config:main"
+cortex-mcp = "tools.mcp_server:main"
 
 [build-system]
 requires = ["hatchling"]

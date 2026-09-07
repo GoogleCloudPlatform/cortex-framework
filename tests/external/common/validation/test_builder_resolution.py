@@ -57,7 +57,7 @@ def test_builder_resolution_integrity(repo_root: pathlib.Path):
         local_builder_path = module_dir / "builder.py"
         if local_builder_path.exists():
             rel_path = module_dir.relative_to(src_dir)
-            local_module_path = f"{str(rel_path).replace('/', '.')}.builder"
+            local_module_path = f"{rel_path.as_posix().replace('/', '.')}.builder"
             try:
                 # Dynamically import the local builder module
                 module = importlib.import_module(local_module_path)

@@ -483,7 +483,7 @@ def test_create_data_product_with_linked_assets_custom_project(mock_dataplex_cli
     assert set(result.data_assets) == set(expected_assets)
 
 
-def test_is_managed_data_product_true():
+def test_is_managed_data_product_true(mock_dataplex_client):
     info = DataProductInfo(
         id="dp1",
         project_id="proj",
@@ -493,11 +493,11 @@ def test_is_managed_data_product_true():
         labels={"cortex-framework-created": "true", "cortex-framework-version": "7-0-0"},
     )
     dp = DataProduct(data_product_info=info)
-    client = DataProductClient(project_id="proj")
+    client = DataProductClient(project_id="proj", dataplex_client=mock_dataplex_client)
     assert client.is_managed_data_product(dp) is True
 
 
-def test_is_managed_data_product_false_missing_created_label():
+def test_is_managed_data_product_false_missing_created_label(mock_dataplex_client):
     info = DataProductInfo(
         id="dp1",
         project_id="proj",
@@ -507,11 +507,11 @@ def test_is_managed_data_product_false_missing_created_label():
         labels={"cortex-framework-version": "7-0-0"},
     )
     dp = DataProduct(data_product_info=info)
-    client = DataProductClient(project_id="proj")
+    client = DataProductClient(project_id="proj", dataplex_client=mock_dataplex_client)
     assert client.is_managed_data_product(dp) is False
 
 
-def test_is_managed_data_product_false_version_mismatch():
+def test_is_managed_data_product_false_version_mismatch(mock_dataplex_client):
     info = DataProductInfo(
         id="dp1",
         project_id="proj",
@@ -521,13 +521,13 @@ def test_is_managed_data_product_false_version_mismatch():
         labels={"cortex-framework-created": "true", "cortex-framework-version": "6-0-0"},
     )
     dp = DataProduct(data_product_info=info)
-    client = DataProductClient(project_id="proj")
+    client = DataProductClient(project_id="proj", dataplex_client=mock_dataplex_client)
     assert client.is_managed_data_product(dp) is False
 
 
-def test_is_managed_data_product_no_info_raises():
+def test_is_managed_data_product_no_info_raises(mock_dataplex_client):
     dp = DataProduct(data_product_info=None)
-    client = DataProductClient(project_id="proj")
+    client = DataProductClient(project_id="proj", dataplex_client=mock_dataplex_client)
     with pytest.raises(IllegalArgumentError):
         client.is_managed_data_product(dp)
 

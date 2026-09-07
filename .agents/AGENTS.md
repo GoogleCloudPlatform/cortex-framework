@@ -18,6 +18,8 @@ When the user issues any of the following commands, you must immediately load th
 | `/build-and-deploy` | [build_and_deploy_data_product](file:///.agents/skills/build_and_deploy_data_product/SKILL.md) | Syncs environment variables, identifies configuration profiles, builds Dataform models, and deploys data products. |
 | `/query-sap-ddic` | [query_sap_ddic](file:///.agents/skills/query_sap_ddic/SKILL.md) | Inspects and dumps SAP table schemas directly from replicated SAP DDIC tables in BigQuery. |
 | `/generate-er-diagram` | [generate_er_diagram](file:///.agents/skills/generate_er_diagram/SKILL.md) | Extracts schema definitions, automatically infers entity relationships via SAP field suffixes, and generates visual ERDs. |
+| `/generate-assertions` | [dataform_assertion_generator](file:///.agents/skills/dataform_assertion_generator/SKILL.md) | Inspects data products and generates automated Dataform data-integrity assertions and ledger reconciliation checks. |
+| `/generate-lookml` | [lookml_generator](file:///.agents/skills/lookml_generator/SKILL.md) | Generates production-ready Looker LookML views, dimensions, measures, and explores from Cortex data product schemas. |
 | `/create-skill` | [create_skill](file:///.agents/skills/create_skill/SKILL.md) | Evaluates overlap, scaffolds new skills or custom folder overrides, authors instructions, and validates anatomy. |
 
 ---

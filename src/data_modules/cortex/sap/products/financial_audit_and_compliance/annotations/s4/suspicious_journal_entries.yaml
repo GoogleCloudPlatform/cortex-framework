@@ -1,0 +1,58 @@
+description: Identifies anomalous and high-risk SAP journal entries from BKPF and BSEG tables based on forensic accounting indicators such as weekend postings, round-sum amounts, missing reference documents, and out-of-period entries.
+fields:
+  - name: client_mandt
+    description: Client (Mandant) identifier in SAP S/4HANA, PK.
+  - name: company_code_bukrs
+    description: Company Code representing the legal reporting entity, PK.
+  - name: document_number_belnr
+    description: Accounting document number, PK.
+  - name: fiscal_year_gjahr
+    description: Fiscal year of the posted transaction, PK.
+  - name: line_item_buzei
+    description: Number of line item within the accounting document, PK.
+  - name: document_type_blart
+    description: Accounting document type.
+  - name: document_date_bldat
+    description: Document date on originating commercial invoice or journal.
+  - name: posting_date_budat
+    description: General ledger posting date.
+  - name: posting_period_monat
+    description: Fiscal posting period (month).
+  - name: entry_date_cpudt
+    description: Physical system entry date.
+  - name: time_of_entry_cputm
+    description: System entry time.
+  - name: entered_by_usnam
+    description: User name of the person who entered the document.
+  - name: transaction_code_tcode
+    description: SAP transaction code used to create the document.
+  - name: reference_document_xblnr
+    description: Reference document number provided during manual entry.
+  - name: document_header_text_bktxt
+    description: Free text header memo.
+  - name: posting_key_bschl
+    description: SAP posting key determining debit/credit and account type.
+  - name: debit_credit_shkzg
+    description: Debit/credit indicator (S = Debit, H = Credit).
+  - name: general_ledger_account_hkont
+    description: General ledger account number affected by this line item.
+  - name: amount_in_local_currency_dmbtr
+    description: Transaction amount in local company code currency, decimal-shifted via TCURX.
+  - name: currency_key_waers
+    description: Currency key of the posted amount.
+  - name: cost_center_kostl
+    description: Controlling cost center.
+  - name: profit_center_prctr
+    description: Controlling profit center.
+  - name: item_text_sgtxt
+    description: Line item explanation text.
+  - name: is_weekend_entry
+    description: Boolean flag indicating if entry was keyed on a Saturday or Sunday.
+  - name: is_round_sum_entry
+    description: Boolean flag indicating if entry amount is an exact round thousand.
+  - name: is_missing_reference_document
+    description: Boolean flag indicating missing external invoice/reference documentation.
+  - name: is_out_of_period_entry
+    description: Boolean flag indicating discrepancy between physical entry date and ledger posting date.
+  - name: audit_risk_classification
+    description: High-level risk category (HIGH_RISK_AUDIT_FLAG or STANDARD_POSTING).

@@ -21,7 +21,12 @@ from google.cloud import resourcemanager_v3
 from common.clients.resource_manager import ResourceManagerClient
 
 
-def test_get_project_number_success():
+@pytest.fixture
+def mock_folders_client():
+    return MagicMock(spec=resourcemanager_v3.FoldersClient)
+
+
+def test_get_project_number_success(mock_folders_client):
     # Mock the ProjectsClient
     mock_client = MagicMock(spec=resourcemanager_v3.ProjectsClient)
 
@@ -31,7 +36,7 @@ def test_get_project_number_success():
     mock_client.get_project.return_value = mock_project
 
     # Instantiate the ResourceManagerClient with the mocked client
-    rm_client = ResourceManagerClient(client=mock_client)
+    rm_client = ResourceManagerClient(client=mock_client, folders_client=mock_folders_client)
 
     # Call the method
     project_number = rm_client.get_project_number("my-project-id")
@@ -41,14 +46,14 @@ def test_get_project_number_success():
     mock_client.get_project.assert_called_once_with(name="projects/my-project-id")
 
 
-def test_get_project_number_failure():
+def test_get_project_number_failure(mock_folders_client):
     # Mock the ProjectsClient to raise an exception
     mock_client = MagicMock(spec=resourcemanager_v3.ProjectsClient)
     mock_client.get_project.side_effect = GoogleAPICallError(
         "Permission denied or project not found"
     )
 
-    rm_client = ResourceManagerClient(client=mock_client)
+    rm_client = ResourceManagerClient(client=mock_client, folders_client=mock_folders_client)
 
     # Call the method and expect an exception
     with pytest.raises(GoogleAPICallError) as exc_info:
@@ -58,9 +63,8 @@ def test_get_project_number_failure():
     mock_client.get_project.assert_called_once_with(name="projects/my-project-id")
 
 
-def test_get_project_ancestry_success():
+def test_get_project_ancestry_success(mock_folders_client):
     mock_projects_client = MagicMock(spec=resourcemanager_v3.ProjectsClient)
-    mock_folders_client = MagicMock(spec=resourcemanager_v3.FoldersClient)
 
     mock_project = MagicMock()
     mock_project.name = "projects/123456789012"
@@ -87,11 +91,13 @@ def test_get_project_ancestry_success():
     mock_folders_client.get_folder.assert_called_once_with(name="folders/111")
 
 
-def test_get_project_ancestry_failure_fallback():
+def test_get_project_ancestry_failure_fallback(mock_folders_client):
     mock_projects_client = MagicMock(spec=resourcemanager_v3.ProjectsClient)
     mock_projects_client.get_project.side_effect = GoogleAPICallError("API error")
 
-    rm_client = ResourceManagerClient(client=mock_projects_client)
+    rm_client = ResourceManagerClient(
+        client=mock_projects_client, folders_client=mock_folders_client
+    )
     ancestry = rm_client.get_project_ancestry("my-project-id")
 
     assert ancestry == ["projects/my-project-id"]
